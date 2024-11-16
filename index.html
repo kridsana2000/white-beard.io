@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .button {
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            border: none;
+            color: #555;
+            padding: 30px 60px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), 
+                        -10px -10px 20px rgba(255, 255, 255, 0.7);
+            transition: background 0.3s, transform 0.3s;
+            margin-top: 30px;
+        }
+
+        .button:hover {
+            background: linear-gradient(145deg, #dcdcdc, #f7f7f7);
+            transform: scale(1.1);
+        }
+
+        .button:active {
+            background: linear-gradient(145deg, #f7f7f7, #dcdcdc);
+            box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.2), 
+                        inset -5px -5px 15px rgba(255, 255, 255, 0.7);
+        }
+
+        h1 {
+            font-size: 60px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #555;
+            text-shadow: 
+                2px 2px 5px rgba(0, 0, 0, 0.3), 
+                4px 4px 10px rgba(0, 0, 0, 0.2);
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+
+        .fade-in {
+            opacity: 1;
+        }
+
+        .options {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .option-button {
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            border: none;
+            color: #555;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), 
+                        -10px -10px 20px rgba(255, 255, 255, 0.7);
+            transition: background 0.3s, transform 0.3s;
+            position: relative;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .option-button:hover {
+            background: linear-gradient(145deg, #dcdcdc, #f7f7f7);
+            transform: scale(1.1);
+        }
+
+        .option-button:active {
+            background: linear-gradient(145deg, #f7f7f7, #dcdcdc);
+        }
+
+        .option-button img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .description {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #888;
+            font-weight: bold;
+            z-index: 1;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        .new-button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        .new-option-button {
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            border: none;
+            color: #555;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), 
+                        -10px -10px 20px rgba(255, 255, 255, 0.7);
+            transition: background 0.3s, transform 0.3s;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .new-option-button img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .new-option-button:hover {
+            background: linear-gradient(145deg, #dcdcdc, #f7f7f7);
+            transform: scale(1.1);
+        }
+
+        .new-option-button:active {
+            background: linear-gradient(145deg, #f7f7f7, #dcdcdc);
+        }
+
+        /* ทำให้หน้า "ตัวอย่างภาพใหม่" เลื่อนได้ */
+        #newExamplePage {
+            overflow-y: auto;
+            height: 100vh;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="page1">
+        <button class="button" id="startButton">Start</button>
+    </div>
+
+    <div class="container hidden" id="page2">
+        <h1 id="welcomeText">หนวดขาวช่างภาพยินดีต้อนรับ</h1>
+        <button class="button" id="nextButton">Next</button>
+    </div>
+
+    <div class="container hidden" id="page3">
+        <h1>เลือกช่องทาง</h1>
+        <div class="options">
+            <div class="option-button" id="viewExamplesButton">
+                <p class="description">ตัวอย่างภาพ</p>
+                <img src="https://img.freepik.com/premium-vector/vector-man-holding-camera-his-hand_176841-1358.jpg" alt="Example Image">
+            </div>
+            <div class="option-button" id="contactUsButton">
+                <p class="description">ติดต่อเรา</p>
+                <img src="file:///C:/Users/www/Downloads/%E0%B8%94%E0%B8%B5%E0%B9%84%E0%B8%8B%E0%B8%99%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%B1%E0%B8%87%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD.png" alt="Contact Us">
+            </div>
+        </div>
+    </div>
+
+    <div class="container hidden" id="contactPage">
+        <h1>กำลังนำท่านไปยังช่องทางการติดต่อ</h1>
+        <p class="contact-description">ขอบคุณที่ให้ความสนใจ</p>
+        <div class="buttons-container">
+            <button class="back-button" id="backButton">Back</button>
+            <button class="go-button" id="nextToFacebook">GO</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="newExamplePage">
+        <h1>ตัวอย่างภาพใหม่</h1>
+        <div class="new-button-container" id="newExampleContainer">
+            <!-- Creating 8 example buttons with GIFs -->
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/17q2k6Dhe2/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/462563117_1047965103799664_5827239296851277870_n.jpg" alt="Example 1">
+            </div>
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/14pH1gF9r2/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/462549442_2228360277539089_7449679522705263899_n.jpg" alt="Example 2">
+            </div>
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/1AQrx5kCDQ/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/462551245_447206801396985_6880865615072682102_n.jpg" alt="Example 3">
+            </div>
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/1BuA5bYTBZ/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/462557611_860925796198212_6719333915747386082_n.jpg" alt="Example 4">
+            </div>
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/1FktJ9rkLB/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/462570634_1076121133980444_4665092859759771265_n.jpg" alt="Example 5">
+            </div>
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/14QA69z9kx/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/462546780_419908934507082_3069256034361595546_n.jpg" alt="Example 6">
+            </div>
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/1AiHKh6R37/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/462218453_122175670628212578_302303883141862782_n.jpg" alt="Example 7">
+            </div>
+            <div class="new-option-button" onclick="window.location.href='https://www.facebook.com/share/p/15FuPFZL25/'">
+                <img src="file:///C:/Users/www/Desktop/%E0%B8%A3%E0%B8%B9%E0%B8%9B/432264024_122120410142212578_7273097082718313016_n.jpg" alt="Example 8">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const startButton = document.getElementById("startButton");
+        const nextButton = document.getElementById("nextButton");
+        const page1 = document.getElementById("page1");
+        const page2 = document.getElementById("page2");
+        const page3 = document.getElementById("page3");
+        const contactPage = document.getElementById("contactPage");
+        const newExamplePage = document.getElementById("newExamplePage");
+        const viewExamplesButton = document.getElementById("viewExamplesButton");
+        const contactUsButton = document.getElementById("contactUsButton");
+        const backButton = document.getElementById("backButton");
+        const nextToFacebook = document.getElementById("nextToFacebook");
+
+        startButton.onclick = function () {
+            page1.classList.add("hidden");
+            page2.classList.remove("hidden");
+        };
+
+        nextButton.onclick = function () {
+            page2.classList.add("hidden");
+            page3.classList.remove("hidden");
+        };
+
+        viewExamplesButton.onclick = function () {
+            page3.classList.add("hidden");
+            newExamplePage.classList.remove("hidden");
+        };
+
+        contactUsButton.onclick = function () {
+            page3.classList.add("hidden");
+            contactPage.classList.remove("hidden");
+        };
+
+        backButton.onclick = function () {
+            contactPage.classList.add("hidden");
+            page3.classList.remove("hidden");
+        };
+
+        nextToFacebook.onclick = function () {
+            window.location.href = "https://www.facebook.com/yourpage";
+        };
+    </script>
+</body>
+</html>
